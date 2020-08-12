@@ -2,6 +2,7 @@ package com.astiservices.apirest.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,7 +40,7 @@ public class Employee implements Serializable {
     @Size(max = 10)
     private String phoneNumberEmployee;
     
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "employee_to_department_fk"), name = "department")
     private Department department;
 
