@@ -39,8 +39,6 @@ public class Department {
         this.idDepartment = idDepartment;
     }
     
-    
-    
     public Long getIdDepartment() {
         return idDepartment;
     }
@@ -56,7 +54,4 @@ public class Department {
     public void setNameDepartment(String nameDepartment) {
         this.nameDepartment = nameDepartment;
     }
-    
-    
-
 }
