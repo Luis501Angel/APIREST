@@ -6,6 +6,7 @@
 package com.astiservices.apirest.repository;
 
 import com.astiservices.apirest.model.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Asti Consultoria de Software
  */
 public interface IRepositoryUser extends JpaRepository<User, Long>{
+    
+    List<User> findByUsername(String username);
     
 }

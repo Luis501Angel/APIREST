@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +34,17 @@ public class ControllerUser {
     private IRepositoryUser repositoryUser;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
-        String token = getJWTToken(username);
-
-        return token;
+    public String login(@RequestParam("user") String username, @RequestParam("password") String password) {
+        List<User> lstUserExits = repositoryUser.findByUsername(username);
+        if (lstUserExits.isEmpty()) {
+            return "El usuario no existe";
+        } else {
+            if (lstUserExits.get(0).getPassword().equals(password)) {
+                String token = getJWTToken(username);
+                return token;
+            }
+        }
+        return "Contraseña incorrecta";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -59,7 +65,7 @@ public class ControllerUser {
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000)) // 10 hours
+                .setExpiration(new Date(System.currentTimeMillis() + 600000)) // 10 minutes
                 .signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
 
         return "Bearer " + token;
