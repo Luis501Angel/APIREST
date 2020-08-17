@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,24 +20,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableAutoConfiguration
+@CrossOrigin
 public class ControllerDepartment {
 
     @Autowired
     private IRepositoryDepartment repositoryDepartment;
 
-    @RequestMapping(value = "/department", method = RequestMethod.GET)
+    @RequestMapping(value = "/departments", method = RequestMethod.GET)
     public List<Department> getAllDepartment() {
-        List<Department> lstDeparment = repositoryDepartment.findAll();
-        return lstDeparment;
+        return repositoryDepartment.findAll();
     }
 
-    @RequestMapping(value = "/department/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/departments/{id}", method = RequestMethod.GET)
     public Department getDepartment(@PathVariable Long id) {
         Optional<Department> department = repositoryDepartment.findById(id);
         return department.get();
     }
 
-    @RequestMapping(value = "/department", method = RequestMethod.POST)
+    @RequestMapping(value = "/departments", method = RequestMethod.POST)
     public Boolean saveDepartment(@RequestBody Department department) {
         try {
             repositoryDepartment.save(department);
@@ -46,7 +47,7 @@ public class ControllerDepartment {
         }
     }
 
-    @RequestMapping(value = "/department", method = RequestMethod.PUT)
+    @RequestMapping(value = "/departments", method = RequestMethod.PUT)
     public Boolean updateDepartment(@RequestBody Department department) {
         try {
             repositoryDepartment.save(department);
@@ -56,7 +57,7 @@ public class ControllerDepartment {
         }
     }
     
-    @RequestMapping(value = "/department/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/departments/{id}", method = RequestMethod.DELETE)
     public Boolean deleteDepartment(@PathVariable Long id){
       try{
           repositoryDepartment.deleteById(id);

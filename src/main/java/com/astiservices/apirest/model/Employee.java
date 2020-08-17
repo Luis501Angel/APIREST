@@ -40,7 +40,8 @@ public class Employee implements Serializable {
     @Size(max = 10)
     private String phoneNumberEmployee;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(foreignKey = @ForeignKey(name = "employee_to_department_fk"), name = "department")
     private Department department;
 

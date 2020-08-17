@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @EnableAutoConfiguration
+@CrossOrigin
 public class ControllerUser {
 
     @Autowired
@@ -40,8 +42,7 @@ public class ControllerUser {
             return "El usuario no existe";
         } else {
             if (lstUserExits.get(0).getPassword().equals(password)) {
-                String token = getJWTToken(username);
-                return token;
+                return getJWTToken(username);
             }
         }
         return "Contraseña incorrecta";
@@ -65,7 +66,7 @@ public class ControllerUser {
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000)) // 10 minutes
+                .setExpiration(new Date(System.currentTimeMillis() + 6000000)) // 1 hora
                 .signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
 
         return "Bearer " + token;
