@@ -34,7 +34,11 @@ public class ControllerEmployee {
     @RequestMapping(value="/employees/{id}", method = RequestMethod.GET)
     public Employee getEmployee(@PathVariable Long id){
         Optional<Employee> employees = respositoryEmployees.findById(id);
-        return employees.get();
+        if(employees.isPresent()){
+            return employees.get();
+        } else {
+            return null;
+        }
     }
     
     @RequestMapping(value="/employees", method = RequestMethod.POST)

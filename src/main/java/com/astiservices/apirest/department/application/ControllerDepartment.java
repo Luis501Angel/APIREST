@@ -34,7 +34,11 @@ public class ControllerDepartment {
     @RequestMapping(value = "/departments/{id}", method = RequestMethod.GET)
     public Department getDepartment(@PathVariable Long id) {
         Optional<Department> department = repositoryDepartment.findById(id);
-        return department.get();
+        if(department.isPresent()){
+            return department.get();
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.POST)

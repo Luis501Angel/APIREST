@@ -47,7 +47,8 @@ public class ControllerUser {
         }
         return "Contraseña incorrecta";
     }
-
+    
+    @CrossOrigin
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public User signup(@RequestBody User user) {
         return repositoryUser.save(user);
