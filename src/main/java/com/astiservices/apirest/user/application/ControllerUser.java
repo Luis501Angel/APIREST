@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.astiservices.apirest.controller;
+package com.astiservices.apirest.user.application;
 
-import com.astiservices.apirest.model.User;
-import com.astiservices.apirest.repository.IRepositoryUser;
+import com.astiservices.apirest.user.domain.User;
+import com.astiservices.apirest.user.infrastructure.IRepositoryUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;

@@ -1,7 +1,7 @@
-package com.astiservices.apirest.controller;
+package com.astiservices.apirest.department.application;
 
-import com.astiservices.apirest.model.Department;
-import com.astiservices.apirest.repository.IRepositoryDepartment;
+import com.astiservices.apirest.department.domain.Department;
+import com.astiservices.apirest.department.infrastructure.IRepositoryDepartment;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

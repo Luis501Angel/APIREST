@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.astiservices.apirest.repository;
+package com.astiservices.apirest.employee.infrastructure;
 
-import com.astiservices.apirest.model.Employee;
+import com.astiservices.apirest.employee.domain.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

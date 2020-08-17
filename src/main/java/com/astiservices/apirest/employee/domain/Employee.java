@@ -1,5 +1,6 @@
-package com.astiservices.apirest.model;
+package com.astiservices.apirest.employee.domain;
 
+import com.astiservices.apirest.department.domain.Department;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

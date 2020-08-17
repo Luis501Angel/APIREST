@@ -1,7 +1,7 @@
-package com.astiservices.apirest.controller;
+package com.astiservices.apirest.employee.application;
 
-import com.astiservices.apirest.model.Employee;
-import com.astiservices.apirest.repository.IRepositoryEmployee;
+import com.astiservices.apirest.employee.domain.Employee;
+import com.astiservices.apirest.employee.infrastructure.IRepositoryEmployee;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

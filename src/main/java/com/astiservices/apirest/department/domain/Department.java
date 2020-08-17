@@ -1,4 +1,4 @@
-package com.astiservices.apirest.model;
+package com.astiservices.apirest.department.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
