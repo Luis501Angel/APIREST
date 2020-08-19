@@ -10,13 +10,17 @@ import com.astiservices.apirest.user.infrastructure.IRepositoryUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,26 +33,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @EnableAutoConfiguration
-@CrossOrigin
+@CrossOrigin()
 public class ControllerUser {
 
     @Autowired
     private IRepositoryUser repositoryUser;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("user") String username, @RequestParam("password") String password) {
+    public Map<String, String> login(@RequestParam("user") String username, @RequestParam("password") String password) {
         List<User> lstUserExits = repositoryUser.findByUsername(username);
+        HashMap<String, String> map = new HashMap<>();
         if (lstUserExits.isEmpty()) {
-            return "El usuario no existe";
+            map.put("message", "El usuario no existe");
+            return map;
         } else {
             if (lstUserExits.get(0).getPassword().equals(password)) {
-                return getJWTToken(username);
+                map.put("message", getJWTToken(username));
+                return map;
             }
         }
-        return "Contraseña incorrecta";
+        map.put("message ", "Password incorrecta");
+        return map;
     }
-    
-    @CrossOrigin
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public User signup(@RequestBody User user) {
         return repositoryUser.save(user);
@@ -70,6 +77,6 @@ public class ControllerUser {
                 .setExpiration(new Date(System.currentTimeMillis() + 6000000)) // 1 hora
                 .signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
 
-        return "Bearer " + token;
+        return token;
     }
 }

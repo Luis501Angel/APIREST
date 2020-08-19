@@ -3,7 +3,6 @@ package com.astiservices.apirest.employee.domain;
 import com.astiservices.apirest.department.domain.Department;
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

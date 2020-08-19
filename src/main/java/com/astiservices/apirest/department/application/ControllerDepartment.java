@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableAutoConfiguration
-@CrossOrigin
+@CrossOrigin("*")
 public class ControllerDepartment {
 
     @Autowired
